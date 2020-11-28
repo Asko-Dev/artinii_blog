@@ -1,45 +1,61 @@
+from random import sample
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    base,
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+    )
 from .models import Post
-from competition.models import AmateurCompetition
 
-    # ukazka jak spojit dve app instance v jeden context
-    # def home(request):
-    #     context = {
-    #         'posts': Post.objects.filter(),
-    #         'submissions': AmateurCompetition.objects.filter()
-    #     }
-    #     return render(request, 'blog/home.html', context)
 
+def _context_data(self, view_type, **kwargs):
+    article = Post.objects.filter(status="ACTIVE").order_by('?').first()
+    context_data = super(view_type, self).get_context_data(**kwargs)
+    context_data['main_title'] = article.main_title
+    image = article.image
+    context_data['image'] = image if image else article.image2
+    context_data['slug'] = article.slug
+    return context_data
 
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/movie_blog.html'  # app/model/viewtype.html
+    template_name = 'blog/movie_blog.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5
 
+    def get_queryset(self):
+        qs = Post.objects.filter(status="ACTIVE")
+        tag = self.request.GET.get('tag')
+        if tag:
+            qs = Post.objects.filter(tag__icontains=tag)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context_data = _context_data(self, PostListView, **kwargs)
+        return context_data
+
+
 class PostListViewPublicUser(ListView):
-   model = Post
-   template_name = 'blog/user_posts_public.html' #app/model/viewtype.html
-   context_object_name = 'posts'
-   paginate_by = 5
+    model = Post
+    template_name = 'blog/user_posts_public.html'
+    context_object_name = 'posts'
+    paginate_by = 5
 
-   def get_queryset(self):
-       user = get_object_or_404(User, username=self.kwargs.get('username'))
-       return Post.objects.filter(author=user).order_by('-date_posted')
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
 
-def home(request):
-    return render (request, 'blog/home.html', {'title': 'Artinii Home'})
+    def get_context_data(self, **kwargs):
+        context_data = _context_data(self, PostListViewPublicUser, **kwargs)
+        return context_data
 
-class MoviesListView(ListView):
-    model = AmateurCompetition
-    template_name = 'blog/movie_list.html'  # app/model/viewtype.html
-    context_object_name = 'movies'
-    ordering = ['-date_posted']
 
 class PostListViewUser(LoginRequiredMixin, ListView):
     model = Post
@@ -51,22 +67,51 @@ class PostListViewUser(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Post.objects.filter(author=self.request.user)
 
-    # Mixin to update the context
-    # https://docs.djangoproject.com/en/1.8/ref/class-based-views/mixins-simple/#django.views.generic.base.ContextMixin.get_context_data
     def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
-        context.update({
-            'submissions': AmateurCompetition.objects.filter(user=self.request.user)
-        })
-        return context
+        context_data = _context_data(self, PostListViewUser, **kwargs)
+        return context_data
 
 
 class PostDetailView(DetailView):
     model = Post
 
+    def get_context_data(self, **kwargs):
+        context_data = _context_data(self, PostDetailView, **kwargs)
+        return context_data
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'image', 'title2', 'content2', 'image2', 'title3', 'content3', 'content4', 'link', 'link2']
+    fields = [
+        'main_title',
+        'slug',
+        'title',
+        'content',
+        'image',
+        'title2',
+        'content2',
+        'image2',
+        'title3',
+        'content3',
+        'image3',
+        'title4',
+        'content4',
+        'image4',
+        'title5',
+        'content5',
+        'image5',
+        'socials_title',
+        'socials_pitch',
+        'name_link',
+        'link',
+        'name_link2',
+        'link2',
+        'name_link3',
+        'link3',
+        'tag',
+        'status'
+        ]
+
     template_name = 'blog/post_create.html'
 
     def form_valid(self, form):
@@ -76,7 +121,35 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'image', 'title2', 'content2', 'image2', 'title3', 'content3', 'content4', 'link', 'link2']
+    fields = [
+        'main_title',
+        'slug',
+        'title',
+        'content',
+        'image',
+        'title2',
+        'content2',
+        'image2',
+        'title3',
+        'content3',
+        'image3',
+        'title4',
+        'content4',
+        'image4',
+        'title5',
+        'content5',
+        'image5',
+        'socials_title',
+        'socials_pitch',
+        'name_link',
+        'link',
+        'name_link2',
+        'link2',
+        'name_link3',
+        'link3',
+        'tag',
+        'status',
+        ]
     template_name = 'blog/post_update.html'
 
     def form_valid(self, form):
@@ -99,7 +172,3 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
-
-
-def about(request):
-    return render(request, 'blog/about.html', {'title': 'About'})

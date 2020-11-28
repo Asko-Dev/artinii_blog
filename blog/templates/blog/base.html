@@ -10,37 +10,42 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main2.css' %}">
 
     {% if title %}
-      <title>Django Blog - {{ title }}</title>
+      <title>Artinii Blog - {{ title }}</title>
     {% else %}
-      <title>Django Blog</title>
+      <title>Artinii Blog</title>
     {% endif %}
   </head>
-  <body>
+  <body class="bg-dark">
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'artinii-home' %}">Artinii</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'movie-blog' %}">Movie Blog</a>
-              <a class="nav-item nav-link text-info" href="{% url 'amateur-competition' %}">Amateur Competition</a>
-              <a class="nav-item nav-link" href="{% url 'blog-about' %}">About Us</a>
+              <small><a class="nav-item nav-link" href="{% url 'movie-blog' %}">CHOOSE A FILM</a></small>
+              <small><a class="nav-item nav-link" href="{% url 'movie-blog' %}">SET-UP A CINEMA</a></small>
+              <small><a class="nav-item nav-link" href="{% url 'movie-blog' %}">FILM FESTIVALS</a></small>
+              <small><a class="nav-item nav-link" href="{% url 'movie-blog' %}">FILM INDUSTRY</a></small>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-                  <a class="nav-item nav-link" href="{% url 'post-user' %}">My Artinii</a>
-                <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
-                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                <div class="dropdown">
+                  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin Menu
+                  </button>
+                  <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item text-dark" href="/admin">Admin Portal</a>
+                    <a class="dropdown-item text-dark" href="{% url 'post-create' %}">New Post</a>
+                    <a class="dropdown-item text-dark" href="{% url 'post-user' %}">My Posts</a>
+                    <a class="dropdown-item text-dark" href="{% url 'profile' %}">My Profile</a>
+                    <a class="dropdown-item text-dark" href="{% url 'logout' %}">Logout</a>
+                  </div>
+                </div>
               {% else %}
-                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'login' %}">Admin Login</a>
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
               {% endif %}
             </div>
@@ -65,17 +70,28 @@
             <h3>Article Categories</h3>
             <p class='text-muted'>What would you like to explore?
               <ul class="list-group">
-                <a class="list-group-item list-group-item-info" href="https://www.google.com/maps/place/Artinii/@50.0873177,14.4286643,17z/data=!3m1!4b1!4m5!3m4!1s0x470b95b728385f5f:0x7142ab6a04a361f1!8m2!3d50.0873177!4d14.430853"><b>OUR MISSION</b></a>
-                <img class="list-group-item img-fluid img-thumbnail" src="{{ '/media/blog_pics/tutorial.png' }}"></img>
-                <a class="list-group-item list-group-item-info" href="https://www.google.com/maps/place/Artinii/@50.0873177,14.4286643,17z/data=!3m1!4b1!4m5!3m4!1s0x470b95b728385f5f:0x7142ab6a04a361f1!8m2!3d50.0873177!4d14.430853"><b>ARTINII FILM MARKETPLACE</b></a>
-                <img class="list-group-item img-fluid img-thumbnail" src="{{ '/media/blog_pics/library.png' }}" href="https://www.google.com/maps/place/Artinii/@50.0873177,14.4286643,17z/data=!3m1!4b1!4m5!3m4!1s0x470b95b728385f5f:0x7142ab6a04a361f1!8m2!3d50.0873177!4d14.430853"></img>
-                <a class="list-group-item list-group-item-info" href="https://www.google.com/maps/place/Artinii/@50.0873177,14.4286643,17z/data=!3m1!4b1!4m5!3m4!1s0x470b95b728385f5f:0x7142ab6a04a361f1!8m2!3d50.0873177!4d14.430853"><b>ORGANIZE A PUBLIC SCREENING</b></a>
-                <img class="list-group-item img-fluid img-thumbnail" src="{{ '/media/blog_pics/showcase.png' }}"></img>
-                <a class="list-group-item list-group-item-info" href="https://www.google.com/maps/place/Artinii/@50.0873177,14.4286643,17z/data=!3m1!4b1!4m5!3m4!1s0x470b95b728385f5f:0x7142ab6a04a361f1!8m2!3d50.0873177!4d14.430853"><b>ARTINII CONTENT DELIVERY</b></a>
-                <img class="list-group-item img-fluid img-thumbnail" src="{{ '/media/blog_pics/showcase.png' }}"></img>
+                <a class="list-group-item list-group-item bg-artiniilight text-artinii" href="/blog?tag=our_mission"><b>OUR MISSION</b></a>
+                <a class="list-group-item list-group-item bg-artiniilight text-artinii" href="/blog?tag=film_marketplace"><b>ARTINII FILM MARKETPLACE</b></a>
+                <a class="list-group-item list-group-item bg-artiniilight text-artinii" href="/blog?tag=public_screenings"><b>ORGANIZE A PUBLIC SCREENING</b></a>
+                <a class="list-group-item list-group-item- bg-artiniilight text-artinii" href="/blog?tag=content_delivery"><b>ARTINII CONTENT DELIVERY</b></a>
               </ul>
             </p>
           </div>
+            <div class="content-section">
+              <h3>Most Popular Articles</h3>
+              <p class='text-muted'>What others read the most about?
+                <ul class="list-group">
+                  <a class="list-group-item list-group-item bg-artiniilight text-artinii" href="/post/{{slug}}"><b>{{main_title}}</b></a>
+                  <img class="list-group-item img-fluid img-thumbnail" src="{{ image.url }}"></img>
+                  <a class="list-group-item list-group-item bg-artiniilight text-artinii" href="/blog?tag=film_marketplace"><b>Clanek2</b></a>
+                  <img class="list-group-item img-fluid img-thumbnail" src="{{ '/media/blog_pics/library.png' }}" href=""></img>
+                  <a class="list-group-item list-group-item bg-artiniilight text-artinii" href="/blog?tag=public_screenings"><b>Clanek3</b></a>
+                  <img class="list-group-item img-fluid img-thumbnail" src="{{ '/media/blog_pics/showcase.png' }}"></img>
+                  <a class="list-group-item list-group-item bg-artiniilight text-artinii" href="/blog?tag=content_delivery"><b>Clanek4</b></a>
+                  <img class="list-group-item img-fluid img-thumbnail" src="{{ '/media/blog_pics/showcase.png' }}"></img>
+                </ul>
+              </p>
+            </div>
         </div>
       </div>
     </main>
@@ -85,4 +101,71 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
+  <footer class="page-footer font-small text-light bg-black pt-5 pb-3">
+    <div class="container text-md-center">
+      <div class="row justify-content-md-center">
+        <hr class="clearfix w-100 d-md-none">
+        <div class="col-md-2 mx-auto">
+          <text class="font-weight-bold text-black mt-3 mb-4">About Artinii</text>
+          <ul class="list-unstyled">
+            <li class="mt-4">
+              <a class="text-light" href="https://artinii.com/films">Films</a>
+            </li>
+            <li class="mt-2">
+              <a class="text-light" href="https://artinii.com/community">Communities</a>
+            </li>
+            <li class="mt-2">
+              <a class="text-light" href="#!">Set-up a cinema</a>
+            </li>
+            <li class="mt-2">
+              <a class="text-light" href="https://artinii.com/documents/festivals">Film festivals</a>
+            </li>
+            <li class="mt-2">
+              <a class="text-light" href="https://rightsholder.artinii.com/">Film industry</a>
+            </li>
+          </ul>
+        </div>
+        <hr class="clearfix w-100 d-md-none">
+        <div class="col-md-2 mx-auto">
+          <text class="font-weight-bold text-white mt-3 mb-5">For Customers</text>
+
+          <ul class="list-unstyled">
+            <li class="mt-4">
+              <a class="text-light" href="https://artinii.com/player">Artinii Cinema Player</a>
+            </li>
+            <li class="mt-2">
+              <a class="text-light" href="https://artinii.com/blog">Blog</a>
+            </li>
+            <li class="mt-2">
+              <a class="text-light" href="https://artinii.com/contact">Contact</a>
+            </li>
+            <li class="mt-2">
+              <a class="text-light" href="https://artinii.com/about-us">About us</a>
+            </li>
+          </ul>
+        </div>
+        <hr class="clearfix w-100 d-md-none">
+        <div class="col-md-2 mx-auto">
+          <text class="font-weight-bold text-white mt-3 mb-4">Find Us</text>
+          <ul class="list-unstyled list-inline pt-4">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/artinii4u"><img class="rounded-circle socials-img" src="{{ '/media/website_images/fcb.png' }}"></img></a>
+              <!-- <a class="btn-floating btn-fb mr-1"></a> -->
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/artinii4u"><img class="rounded-circle socials-img" src="{{ '/media/website_images/instagram.png' }}"></img></a>
+              <!-- <a class="btn-floating btn-tw mr-2"></a> -->
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.linkedin.com/company/artinii4u"><img class="rounded-circle socials-img" src="{{ '/media/website_images/linkedin.png' }}"></img></a>
+              <!-- <a class="btn-floating btn-gplus mr-2"></a> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="footer-copyright text-center py-3">© 2016 - 2020 ARTinii Intl. a.s
+    </div>
+  </footer>
 </html>

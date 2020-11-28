@@ -16,6 +16,34 @@ ul {
   background-color: #5f788a;
 }
 
+.bg-artinii {
+  background-color: #491a66;
+}
+
+.bg-black {
+  background-color: #191919;
+}
+
+.bg-artiniilight {
+  background-color: #e7cff6;
+}
+
+.text-artinii {
+  color: #491a66;
+}
+
+.text-artiniilight {
+  color: #891ec7;
+}
+
+.text-artinii:hover{
+  color: #891ec7;
+}
+
+.btn-outline-artinii  {
+  color: #e7cff6;
+}
+
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
 }
@@ -53,6 +81,18 @@ a.article-title:hover {
   height: 65px;
   width: 65px;
   margin-right: 16px;
+}
+
+.socials-img {
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+}
+
+.logo-img {
+  height: 35px;
+  width: 75px;
+  margin-right: 10px;
 }
 
 .article-metadata {

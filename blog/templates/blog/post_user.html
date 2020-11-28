@@ -1,34 +1,24 @@
 {% extends "blog/base.html" %}
 {% block content %}
-  {% for submission in submissions %}
-    <h1>Your Movies:</h1>
-    <div class="border-bottom">
-      <article class="media content-section border-success mb-3 btn-outline-warning">
-        <img class="rounded-circle article-img" src="{{ submission.poster.url }}"></img>
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2 text-success" href="{% url 'user-posts-public' submission.user.username %}">{{ submission.user }}</a>
-            <small class="text-muted">{{ submission.date_posted|date:"F d, Y" }}</small>
-          </div>
-          <h2><a class="article-title text-center" href="{% url 'competition-detail' submission.id %}"><u>{{ submission.title }}</u></a></h2>
-          <p class="article-content text-success"><b>CONGRATULATIONS! You have submitted a Movie for revision!</b></p>
-        </div>
-      </article>
-    </div>
-  {% endfor %}
-  <h1>Your Posts:</h1>
+  <h1 class="text-light">Your Posts:</h1>
   {% for post in posts %}
     <div class="mt-3">
       <article class="media content-section">
         <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"></img>
         <div class="media-body">
           <div class="article-metadata">
-            <a class="mr-2 text-warning" href="{% url 'user-posts-public' post.author.username %}">{{ post.author }}</a>
+            <a class="mr-2 text-artiniilight" href="{% url 'user-posts-public' post.author.username %}">{{ post.author }}</a>
             <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
           </div>
-          <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+          <div class="article-metadata">
+            <small><a class="text-muted">Categories: |</a></small>
+            {%  for tag in post.tag %}
+              <small><u><a class="text-muted" href="/blog?tag={{tag}}">{{ post.template_helper|get_item:tag }} |</a></u></small>
+            {% endfor %}
+          </div>
+          <h3><a class="article-title" href="{% url 'post-detail' post.slug %}">{{ post.main_title }}</a></h3>
           <p class="article-content">{{ post.content|truncatewords:"30"|linebreaks }}</p>
-          <a class="text-secondary" href="{% url 'post-detail' post.id %}"><u>Read more...</u></a>
+          <a class="text-secondary" href="{% url 'post-detail' post.slug %}"><u>Read more...</u></a>
         </div>
       </article>
     </div>
@@ -36,21 +26,21 @@
   {% if is_paginated %}
 
     {% if page_obj.has_previous %}
-      <a class ="btn btn-outline-info mb-4" href="?page=1">First</a>
-      <a class ="btn btn-outline-info mb-4" href="?page= {{ page_obj.previous_page_number }}">Previous</a>
+      <a class ="btn btn-outline-artinii mb-4" href="?page=1">First</a>
+      <a class ="btn btn-outline-artinii mb-4" href="?page= {{ page_obj.previous_page_number }}">Previous</a>
     {% endif %}
 
     {% for num in page_obj.paginator.page_range %}
       {% if page_obj.number == num %}
-        <a class ="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        <a class ="btn btn-artiniilight mb-4" href="?page={{ num }}">{{ num }}</a>
       {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-        <a class ="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        <a class ="btn btn-outline-artinii mb-4" href="?page={{ num }}">{{ num }}</a>
       {% endif %}
     {% endfor %}
 
     {% if page_obj.has_next %}
-      <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-      <a class ="btn btn-outline-info mb-4" href="?page= {{ page_obj.paginator.num_pages }}">Last</a>
+      <a class ="btn btn-outline-artinii mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a class ="btn btn-outline-artinii mb-4" href="?page= {{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
 
   {% endif %}
