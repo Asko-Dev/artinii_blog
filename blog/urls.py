@@ -16,6 +16,6 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<slug:slug>/update', PostUpdateView.as_view(), name='post-update'),
     path('post/<slug:slug>/delete', PostDeleteView.as_view(), name='post-delete'),
-    path('my-artinii/', PostListViewUser.as_view(),
+    path('my-posts/', PostListViewUser.as_view(),
          name='post-user', kwargs={'competition': None}),
 ]

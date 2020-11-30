@@ -1,4 +1,3 @@
-from random import sample
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -39,6 +38,7 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context_data = _context_data(self, PostListView, **kwargs)
+        context_data['tag_dict'] = Post.objects.first().template_helper
         return context_data
 
 
@@ -82,36 +82,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = [
-        'main_title',
-        'slug',
-        'title',
-        'content',
-        'image',
-        'title2',
-        'content2',
-        'image2',
-        'title3',
-        'content3',
-        'image3',
-        'title4',
-        'content4',
-        'image4',
-        'title5',
-        'content5',
-        'image5',
-        'socials_title',
-        'socials_pitch',
-        'name_link',
-        'link',
-        'name_link2',
-        'link2',
-        'name_link3',
-        'link3',
-        'tag',
-        'status'
-        ]
-
+    fields = '__all__'
     template_name = 'blog/post_create.html'
 
     def form_valid(self, form):
@@ -121,35 +92,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = [
-        'main_title',
-        'slug',
-        'title',
-        'content',
-        'image',
-        'title2',
-        'content2',
-        'image2',
-        'title3',
-        'content3',
-        'image3',
-        'title4',
-        'content4',
-        'image4',
-        'title5',
-        'content5',
-        'image5',
-        'socials_title',
-        'socials_pitch',
-        'name_link',
-        'link',
-        'name_link2',
-        'link2',
-        'name_link3',
-        'link3',
-        'tag',
-        'status',
-        ]
+    fields = '__all__'
     template_name = 'blog/post_update.html'
 
     def form_valid(self, form):

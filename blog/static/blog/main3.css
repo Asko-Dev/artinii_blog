@@ -83,6 +83,12 @@ a.article-title:hover {
   margin-right: 16px;
 }
 
+.post-img {
+  height: 150px;
+  width: 280px;
+  margin-right: 16px;
+}
+
 .socials-img {
   height: 35px;
   width: 35px;
@@ -90,9 +96,15 @@ a.article-title:hover {
 }
 
 .logo-img {
-  height: 35px;
-  width: 75px;
-  margin-right: 10px;
+  height: 25px;
+  width: 28px;
+  margin-left: 25px;
+}
+
+.logoartinii-img {
+  height: 25px;
+  width: 80px;
+  margin-right: 20px;
 }
 
 .article-metadata {

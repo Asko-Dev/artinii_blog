@@ -9,10 +9,10 @@ from django.template.defaultfilters import slugify
 
 
 class Post(models.Model):
-    OUR_MISSION = "OUR_MISSION"
-    FILM_MARKETPLACE = "FILM_MARKETPLACE"
-    PUBLIC_SCREENINGS = "PUBLIC_SCREENINGS"
-    CONTENT_DELIVERY = "CONTENT_DELIVERY"
+    OUR_MISSION = "our_mission"
+    FILM_MARKETPLACE = "film_marketplace"
+    PUBLIC_SCREENINGS = "public_screenings"
+    CONTENT_DELIVERY = "content_delivery"
 
     template_helper = {
         OUR_MISSION: "Our Mission",
@@ -46,10 +46,10 @@ class Post(models.Model):
     image3 = models.ImageField(upload_to='blog_pics', blank=True, null=True)
     title4 = models.CharField(max_length=100, default=" ", blank=True)
     content4 = models.TextField(default=" ", blank=True)
-    image5 = models.ImageField(upload_to='blog_pics', blank=True, null=True)
+    image4 = models.ImageField(upload_to='blog_pics', blank=True, null=True)
     title5 = models.CharField(max_length=100, default=" ", blank=True)
     content5 = models.TextField(default=" ", blank=True)
-    image4 = models.ImageField(upload_to='blog_pics', blank=True, null=True)
+    image5 = models.ImageField(upload_to='blog_pics', blank=True, null=True)
     socials_title = models.CharField(max_length=100, default=" ", blank=True)
     socials_pitch = models.TextField(default=" ", blank=True)
     name_link = models.CharField(max_length=100, default=" ", blank=True)

@@ -2,28 +2,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main2.css' %}">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main3.css' %}">
     {% if title %}
       <title>Artinii Blog - {{ title }}</title>
     {% else %}
       <title>Artinii Blog</title>
     {% endif %}
   </head>
-  <body class="bg-dark">
+  <body class="bg-light">
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top">
         <div class="container">
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
+              <a href="https://www.artinii.com"><img class="img-fluid logoartinii-img" src="{{ '/media/website_images/artinii_logo_white.png' }}"></img></a>
               <small><a class="nav-item nav-link" href="{% url 'movie-blog' %}">CHOOSE A FILM</a></small>
               <small><a class="nav-item nav-link" href="{% url 'movie-blog' %}">SET-UP A CINEMA</a></small>
               <small><a class="nav-item nav-link" href="{% url 'movie-blog' %}">FILM FESTIVALS</a></small>
@@ -31,9 +26,10 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'movie-blog' %}">All Posts</a>
               {% if user.is_authenticated %}
                 <div class="dropdown">
-                  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-dark dropdown-toggle ml-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Admin Menu
                   </button>
                   <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
@@ -45,8 +41,9 @@
                   </div>
                 </div>
               {% else %}
-                <a class="nav-item nav-link" href="{% url 'login' %}">Admin Login</a>
-                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                <a class="nav-item nav-link text-muted mt-0 mb-0" href="{% url 'login' %}">
+                  <img class="logo-img" src="{{ '/media/website_images/padlock.ico' }}"></img>
+                </a>
               {% endif %}
             </div>
           </div>
@@ -95,8 +92,6 @@
         </div>
       </div>
     </main>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -106,47 +101,47 @@
       <div class="row justify-content-md-center">
         <hr class="clearfix w-100 d-md-none">
         <div class="col-md-2 mx-auto">
-          <text class="font-weight-bold text-black mt-3 mb-4">About Artinii</text>
+          <small class="font-weight-bold text-black mt-3 mb-4">ABOUT ARTINII</small>
           <ul class="list-unstyled">
             <li class="mt-4">
-              <a class="text-light" href="https://artinii.com/films">Films</a>
+              <small><a class="text-light" href="https://artinii.com/films">Films</a></small>
             </li>
             <li class="mt-2">
-              <a class="text-light" href="https://artinii.com/community">Communities</a>
+              <small><a class="text-light" href="https://artinii.com/community">Communities</a></small>
             </li>
             <li class="mt-2">
-              <a class="text-light" href="#!">Set-up a cinema</a>
+              <small><a class="text-light" href="#!">Set-up a cinema</a></small>
             </li>
             <li class="mt-2">
-              <a class="text-light" href="https://artinii.com/documents/festivals">Film festivals</a>
+              <small><a class="text-light" href="https://artinii.com/documents/festivals">Film festivals</a></small>
             </li>
             <li class="mt-2">
-              <a class="text-light" href="https://rightsholder.artinii.com/">Film industry</a>
+              <small><a class="text-light" href="https://rightsholder.artinii.com/">Film industry</a></small>
             </li>
           </ul>
         </div>
         <hr class="clearfix w-100 d-md-none">
         <div class="col-md-2 mx-auto">
-          <text class="font-weight-bold text-white mt-3 mb-5">For Customers</text>
+          <small class="font-weight-bold text-white mt-3 mb-5">FOR CUSTOMERS</small>
 
           <ul class="list-unstyled">
             <li class="mt-4">
-              <a class="text-light" href="https://artinii.com/player">Artinii Cinema Player</a>
+              <small><a class="text-light" href="https://artinii.com/player">Artinii Cinema Player</a></small>
             </li>
             <li class="mt-2">
-              <a class="text-light" href="https://artinii.com/blog">Blog</a>
+              <small><a class="text-light" href="https://artinii.com/blog">Blog</a></small>
             </li>
             <li class="mt-2">
-              <a class="text-light" href="https://artinii.com/contact">Contact</a>
+              <small><a class="text-light" href="https://artinii.com/contact">Contact</a></small>
             </li>
             <li class="mt-2">
-              <a class="text-light" href="https://artinii.com/about-us">About us</a>
+              <small><a class="text-light" href="https://artinii.com/about-us">About us</a></small>
             </li>
           </ul>
         </div>
         <hr class="clearfix w-100 d-md-none">
         <div class="col-md-2 mx-auto">
-          <text class="font-weight-bold text-white mt-3 mb-4">Find Us</text>
+          <small class="font-weight-bold text-white mt-3 mb-4">FIND US</small>
           <ul class="list-unstyled list-inline pt-4">
             <li class="list-inline-item">
               <a href="https://www.facebook.com/artinii4u"><img class="rounded-circle socials-img" src="{{ '/media/website_images/fcb.png' }}"></img></a>
@@ -165,7 +160,8 @@
       </div>
     </div>
     <hr>
-    <div class="footer-copyright text-center py-3">© 2016 - 2020 ARTinii Intl. a.s
+    <small><div class="footer-copyright text-center py-3">© 2016 - 2020 ARTinii Intl. a.s
     </div>
+    </small>
   </footer>
 </html>

@@ -1,5 +1,10 @@
 {% extends "blog/base.html" %}
 {% block content %}
+{% if 'tag' in request.GET %}
+  <article class="media content-section">
+    <h5 class='ml-3 mt-1 mb-1'>Category: {{ tag_dict|get_item:request.GET.tag }}</h5>
+  </article>
+{% endif %}
   {% for post in posts %}
     <article class="media content-section">
       <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"></img>
@@ -15,6 +20,11 @@
           {% endfor %}
         </div>
         <h3 class=mt-3><a class="article-title" href="{% url 'post-detail' post.slug %}">{{ post.main_title }}</a></h3>
+        {% if post.image %}
+          <img class="post-img" src="{{ post.image.url }}"></img>
+        {% else %}
+          <img class="post-img" src="{{ post.image4.url }}"></img>
+        {% endif %}
         <p class="article-content">{{ post.content|truncatewords:"30"|linebreaks }}</p>
         <a class="text-secondary" href="{% url 'post-detail' post.slug %}"><u>Read more...</u></a>
       </div>
